@@ -1,0 +1,38 @@
+<div class="container-fluid my-5">
+  <h1 class="text-center mb-4 text-dark">{{ title }}</h1>
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="Search menu items"
+          [(ngModel)]="prodname" />
+        <div class="input-group-append">
+          <button class="btn btn-primary" type="button" (click)="find(foodmenu)">
+            Search
+          </button>
+        </div>
+      </div>
+      <ul class="list-group">
+        <li class="list-group-item d-flex justify-content-between align-items-center bg-white border-0 mb-3 shadow"
+          *ngFor="let item of find(foodmenu)">
+          <div class="d-flex align-items-center">
+            <img [src]="item.img" alt="{{ item.name }}" class="mr-3 menu-item-img">
+            <div>
+              <h5 class="mb-1 text-dark">{{ item.name }}</h5>
+              <p class="mb-0 text-muted">{{ item.description }}</p>
+            </div>
+          </div>
+          <div class="d-flex align-items-center justify-content-end">
+            <span class="badge badge-dark badge-pill mr-3">{{ item.price | currency:'USD':'symbol' }}</span>
+            <div class="form-check mr-3">
+              <input class="form-check-input" type="checkbox" (change)="sum($event, item.price)" />
+            </div>
+          </div>
+        </li>
+      </ul>
+      <div class="d-flex justify-content-between mt-3">
+        <span class="total-label text-dark">Total: {{ total | currency:'USD':'symbol' }}</span>
+        <span class="total-label text-dark">Quantity: {{ qty }}</span>
+      </div>
+    </div>
+  </div>
+</div>
